@@ -12,8 +12,5 @@
     "@sveltejs/vite-plugin-svelte": "^2.0.3",
     "svelte": "^3.55.1",
     "vite": "^4.2.0"
-  },
-  "dependencies": {
-    "@google-cloud/vision": "^3.1.2"
   }
 }
