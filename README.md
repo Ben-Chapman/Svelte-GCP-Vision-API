@@ -13,9 +13,8 @@
 - Follow the
   [getting started instructions](https://cloud.google.com/vision/docs/detect-labels-image-client-libraries#before-you-begin)
   to setup your GCP environment
-- `npm install --save @google-cloud/vision`
-- Setup your Application Default Credentials:
-  - `gcloud auth application-default login`
+- Create an environment variable which contains your GCP Access Token
+  - `export VITE_AUTH_TOKEN=$(gcloud auth print-access-token)`
 
 ### Notes:
 
