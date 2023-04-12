@@ -1,11 +1,22 @@
 <script>
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from '/vite.svg'
-  import Counter from './lib/Counter.svelte'
+  import svelteLogo from "./assets/svelte.svg";
+  import viteLogo from "/vite.svg";
+  import Counter from "./lib/Counter.svelte";
+  import { annotateImage } from "./lib/vision-api";
+
+  let image = annotateImage("foo");
 </script>
 
 <main>
   <div>
+    {#await image}
+      <p>...waiting</p>
+    {:then resp}
+      <p>The response is {resp}</p>
+    {:catch error}
+      <p style="color: red">{error}</p>
+    {/await}
+
     <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
       <img src={viteLogo} class="logo" alt="Vite Logo" />
     </a>
@@ -18,14 +29,6 @@
   <div class="card">
     <Counter />
   </div>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
 </main>
 
 <style>
