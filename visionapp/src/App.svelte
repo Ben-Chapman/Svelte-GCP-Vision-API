@@ -1,33 +1,29 @@
 <script>
-  import svelteLogo from "./assets/svelte.svg";
-  import viteLogo from "/vite.svg";
-  import Counter from "./lib/Counter.svelte";
-  import { annotateImage } from "./lib/vision-api";
+  import { annotationResults, isProcessing } from "./lib/stores";
+  import Dropzone from "./Dropzone.svelte";
 
-  let image = annotateImage("foo");
+  let results;
+  let imageProcessing;
+
+  annotationResults.subscribe((result) => {
+    results = result;
+  });
+
+  isProcessing.subscribe((status) => {
+    imageProcessing = status;
+  });
 </script>
 
 <main>
+  <Dropzone />
   <div>
-    {#await image}
+    {#await results}
       <p>...waiting</p>
     {:then resp}
       <p>The response is {resp}</p>
     {:catch error}
       <p style="color: red">{error}</p>
     {/await}
-
-    <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-      <img src={viteLogo} class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-  <h1>Vite + Svelte</h1>
-
-  <div class="card">
-    <Counter />
   </div>
 </main>
 

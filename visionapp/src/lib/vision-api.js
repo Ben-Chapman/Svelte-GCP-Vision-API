@@ -1,13 +1,14 @@
 import { testImage } from "./test-image";
 
 export async function annotateImage(sourceImage) {
+  console.log(`Source image here: ${sourceImage}`);
   let postData = {
     requests: [
       {
         image: {
           // The source image needs to be a base64 encoded string
-          content: testImage,
-          // content: convertToBase64(sourceImage)
+          // content: testImage,
+          content: sourceImage,
         },
         features: [
           {
@@ -71,16 +72,4 @@ export async function annotateImage(sourceImage) {
   } catch (fetchError) {
     throw fetchError;
   }
-}
-
-function convertToBase64(file) {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  return reader.result;
-  // reader.onload = function () {
-  //   console.log(reader.result);
-  // };
-  // reader.onerror = function (error) {
-  //   console.log('Error: ', error);
-  // };
 }
