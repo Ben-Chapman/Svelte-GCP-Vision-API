@@ -1,6 +1,6 @@
 <script>
   import { annotationResults, isProcessing } from "./lib/stores";
-  import Dropzone from "./Dropzone.svelte";
+  import Dropzone from "../components/Dropzone.svelte";
 
   let results;
   let imageProcessing;
