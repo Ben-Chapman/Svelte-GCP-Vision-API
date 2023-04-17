@@ -1,9 +1,27 @@
 <script>
-  const foo = "";
+  import { tableRows } from "../src/lib/stores";
+  import SvelteTable from "svelte-table";
+
+  const columns = [
+    {
+      key: "description",
+      title: "Description",
+      value: (v) => v.description,
+      sortable: true,
+    },
+    {
+      key: "confidence",
+      title: "Confidence Value",
+      value: (v) => v.confidence,
+      sortable: true,
+    },
+  ];
+
+  $: rows = $tableRows;
 </script>
 
 <main>
-  <h1>Hi</h1>
+  <SvelteTable {columns} {rows} />
 </main>
 
 <style>

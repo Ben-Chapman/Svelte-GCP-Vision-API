@@ -1,46 +1,35 @@
 <script>
-  import { annotationResults, isProcessing } from "./lib/stores";
+  import Flex from "svelte-flex";
   import Dropzone from "../components/Dropzone.svelte";
 
-  let results;
-  let imageProcessing;
-
-  annotationResults.subscribe((result) => {
-    results = result;
-  });
-
-  isProcessing.subscribe((status) => {
-    imageProcessing = status;
-  });
+  import Annotations from "../components/Annotations.svelte";
 </script>
 
 <main>
-  <Dropzone />
-  <div>
-    {#await results}
-      <p>...waiting</p>
-    {:then resp}
-      <p>The response is {resp}</p>
-    {:catch error}
-      <p style="color: red">{error}</p>
-    {/await}
+  <!-- <Flex class="flexbox"> -->
+  <div class="file-drop">
+    <Dropzone />
   </div>
+
+  <div>
+    <Annotations />
+  </div>
+  <!-- </Flex> -->
 </main>
 
 <style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
+  .file-drop {
+    /* width: 50%; */
+    height: 300px;
+    background-color: purple;
   }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
+  :global(body) {
+    background-color: #3d3d3d;
+    color: #0084f6;
   }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
+  :global(.flexbox) {
+    background-color: aquamarine;
+    width: 80vw;
+    max-height: 100vh;
   }
 </style>

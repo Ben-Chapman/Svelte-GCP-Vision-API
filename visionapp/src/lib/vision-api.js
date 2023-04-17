@@ -1,7 +1,8 @@
 import { testImage } from "./test-image";
+import { tableRows } from "./stores";
 
 export async function annotateImage(sourceImage) {
-  console.log(`Source image here: ${sourceImage}`);
+  // console.log(`Source image here: ${sourceImage}`);
   let postData = {
     requests: [
       {
@@ -13,17 +14,7 @@ export async function annotateImage(sourceImage) {
         features: [
           {
             type: "LABEL_DETECTION",
-            maxResults: 3,
-            model: "builtin/latest",
-          },
-          {
-            type: "TEXT_DETECTION",
-            maxResults: 1,
-            model: "builtin/latest",
-          },
-          {
-            type: "FACE_DETECTION",
-            maxResults: 1,
+            maxResults: 10,
             model: "builtin/latest",
           },
           {
@@ -62,14 +53,38 @@ export async function annotateImage(sourceImage) {
     });
 
     const result = await response.json();
-    console.log(result.error);
 
     if (!response.ok) {
+      console.error(result.error);
       throw new Error(`An error occured with the Vision API: ${result.error.message}`);
     }
-    console.log("Success:", result);
-    return JSON.stringify(result.responses);
+
+    processResults(result);
   } catch (fetchError) {
     throw fetchError;
   }
+}
+
+/**
+ * @param {Object} annotationResult Process the results from a Vision API
+ * annotation request, transforming into the expected format for Svelte Tables:
+ * const rows = [{key1: "value 1", key2: "value 2"}]
+ */
+function processResults(annotationResult) {
+  const responses = annotationResult.responses[0];
+  const rows = [];
+
+  Object.keys(responses).forEach((key) => {
+    responses[key].forEach((item) => {
+      const desc = item?.description;
+      const score = Math.ceil(item.score * 100); // 93.09875434 -> 93
+      rows.push({
+        description: desc,
+        confidence: score,
+      });
+      console.log(`${desc} - ${score}% confident`);
+    });
+  });
+
+  tableRows.set(rows);
 }
