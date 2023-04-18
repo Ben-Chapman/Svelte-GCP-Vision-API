@@ -1,28 +1,28 @@
 <script>
   import { onMount } from "svelte";
-  import { annotationResults, isProcessing } from "../src/lib/stores";
   import { annotateImage } from "../src/lib/vision-api";
 
   import Dropzone from "dropzone";
 
   function createDropzone() {
-    let myDropzone = new Dropzone("#my-dropzone", {
+    let myDropzone = new Dropzone(document.body, {
       url: "#",
-      dictDefaultMessage: "Drop file here or click to upload!!!!!!!!",
-      thumbnailMethod: "contain",
-      thumbnailWidth: 200,
+      dictDefaultMessage: "Drop Image to Process with the GCP Vision API",
+      thumbnailWidth: 800,
+      thumbnailHeight: 500,
       maxFiles: 1,
       acceptedFiles: "image/*",
-      previewsContainer: "",
+      previewsContainer: ".preview-container",
       autoProcessQueue: false,
+      previewTemplate: document.getElementById("custom-template").innerHTML,
     });
 
     myDropzone.on("addedfile", function (file) {
       console.log(`Added here ${file}`);
       const reader = new FileReader();
       reader.onload = () => {
-        // When a file is dropped, write a base-64 encoded string to a Svelte store
-        $annotationResults = annotateImage(reader.result.split(",")[1]);
+        // When a file is dropped, annotate it
+        annotateImage(reader.result.split(",")[1]);
       };
       reader.onabort = () => console.log("file reading was aborted");
       reader.onerror = () => console.log("file reading has failed");
@@ -35,13 +35,21 @@
 </script>
 
 <main>
-  <div class="container dz dropzone" id="my-dropzone" style="margin-top: 30px" />
+  <div class="preview-container" />
+
+  <div id="custom-template">
+    <div class="dz-preview dz-file-preview">
+      <div class="dz-image"><img data-dz-thumbnail /></div>
+      <div class="dz-progress">
+        <span class="dz-upload" data-dz-uploadprogress />
+      </div>
+      <div class="dz-error-message"><span data-dz-errormessage /></div>
+    </div>
+  </div>
 </main>
 
 <style>
-  .dz {
-    width: 80vw;
-    height: 50vh;
-    background-color: red;
+  .preview-container {
+    align-self: flex-end;
   }
 </style>

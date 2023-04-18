@@ -21,8 +21,29 @@
 </script>
 
 <main>
-  <SvelteTable {columns} {rows} />
+  <div class="annotation-results">
+    <SvelteTable
+      {columns}
+      {rows}
+      sortBy="confidence"
+      sortOrder="1"
+      classNameThead="table-head"
+      classNameTbody="table-body"
+    />
+  </div>
 </main>
 
 <style>
+  .annotation-results {
+    flex-grow: 1;
+  }
+  :global(.table-head) {
+    font-weight: 500;
+    font-size: 1.2rem;
+  }
+
+  :global(.table-body) {
+    font-weight: 300;
+    font-size: 1rem;
+  }
 </style>
