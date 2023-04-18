@@ -15,6 +15,7 @@
   to setup your GCP environment
 - Create an environment variable which contains your GCP Access Token
   - `export VITE_AUTH_TOKEN=$(gcloud auth print-access-token)`
+  - `export VITE_GCP_BILLING_PROJECT=$(gcloud config get project)`
 
 ### Notes:
 
