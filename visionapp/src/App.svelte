@@ -18,14 +18,14 @@
 
 <style>
   .file-drop-section {
-    background-color: purple;
+    background-color: #ffffff24;
+    border-radius: 10px;
     flex: 2;
     height: 100%;
     align-self: center;
   }
   .annotation-section {
     flex: 1;
-    background-color: goldenrod;
     height: 100%;
     overflow: scroll;
   }
@@ -36,7 +36,6 @@
     font-family: "Encode Sans Condensed", sans-serif;
   }
   :global(.flexbox) {
-    background-color: aquamarine;
     width: 80vw;
     height: 80vh;
     align-items: center;
