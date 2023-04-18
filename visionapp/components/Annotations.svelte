@@ -26,7 +26,7 @@
       {columns}
       {rows}
       sortBy="confidence"
-      sortOrder="1"
+      sortOrder="0"
       classNameThead="table-head"
       classNameTbody="table-body"
     />
