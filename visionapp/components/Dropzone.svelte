@@ -7,12 +7,12 @@
   function createDropzone() {
     let myDropzone = new Dropzone(document.body, {
       url: "#",
-      dictDefaultMessage: "Drop Image to Process with the GCP Vision API",
       thumbnailWidth: 800,
-      thumbnailHeight: 500,
+      thumbnailHeight: null,
       maxFiles: 1,
       acceptedFiles: "image/*",
       previewsContainer: ".preview-container",
+      clickable: false,
       autoProcessQueue: false,
       previewTemplate: document.getElementById("custom-template").innerHTML,
     });
@@ -36,7 +36,7 @@
 
 <main>
   <div class="preview-container" />
-
+  <h1>Drop image here!</h1>
   <div id="custom-template">
     <div class="dz-preview dz-file-preview">
       <div class="dz-image"><img data-dz-thumbnail /></div>
