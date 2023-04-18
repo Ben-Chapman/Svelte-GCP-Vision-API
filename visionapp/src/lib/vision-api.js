@@ -1,30 +1,27 @@
-import { testImage } from "./test-image";
 import { tableRows } from "./stores";
 
 export async function annotateImage(sourceImage) {
-  // console.log(`Source image here: ${sourceImage}`);
   let postData = {
     requests: [
       {
         image: {
           // The source image needs to be a base64 encoded string
-          // content: testImage,
           content: sourceImage,
         },
         features: [
           {
             type: "LABEL_DETECTION",
-            maxResults: 10,
+            maxResults: 50,
             model: "builtin/latest",
           },
           {
             type: "LANDMARK_DETECTION",
-            maxResults: 10,
+            maxResults: 50,
             model: "builtin/latest",
           },
           {
             type: "LOGO_DETECTION",
-            maxResults: 10,
+            maxResults: 50,
             model: "builtin/latest",
           },
         ],
