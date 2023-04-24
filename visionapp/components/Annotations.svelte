@@ -12,7 +12,7 @@
     {
       key: "confidence",
       title: "Confidence Value",
-      value: (v) => v.confidence,
+      value: (v) => `${v.confidence}  %`,
       sortable: true,
     },
   ];
