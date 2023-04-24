@@ -1,12 +1,10 @@
 <script>
   import { onMount } from "svelte";
-  import { annotateImage } from "../src/lib/vision-api";
-  import { haveImageAnnotations } from "../src/lib/stores";
+  import { imageData } from "../src/lib/stores";
 
   import Dropzone from "dropzone";
 
   let filename = "";
-
   function createDropzone() {
     let myDropzone = new Dropzone(document.body, {
       url: "#",
@@ -25,9 +23,7 @@
       const reader = new FileReader();
       reader.onload = () => {
         filename = file.upload.filename;
-        // When a file is dropped, annotate it
-        annotateImage(reader.result.split(",")[1]);
-        haveImageAnnotations.set(true);
+        imageData.set(reader.result.split(",")[1]);
       };
       reader.onabort = () => console.log("file reading was aborted");
       reader.onerror = () => console.log("file reading has failed");

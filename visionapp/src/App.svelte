@@ -2,8 +2,12 @@
   import Flex from "svelte-flex";
   import Dropzone from "../components/Dropzone.svelte";
   import Annotations from "../components/Annotations.svelte";
+  import { scale } from "svelte/transition";
+  import { quintOut } from "svelte/easing";
+  import { imageData, tableRowData } from "./lib/stores";
 
-  import { haveImageAnnotations } from "./lib/stores";
+  import { Circle3 } from "svelte-loading-spinners";
+  import { annotateImage } from "./lib/vision-api";
 </script>
 
 <svelte:head>
@@ -26,9 +30,20 @@
       <Dropzone />
     </div>
 
-    {#if $haveImageAnnotations}
+    {#if $imageData}
       <div class="annotation-section">
-        <Annotations />
+        {#await annotateImage($imageData)}
+          <div class="waiting-spinner">
+            <Circle3 />
+            Waiting for results...
+          </div>
+        {:then}
+          <Annotations />
+        {:catch error}
+          <div class="error-message">
+            {error}
+          </div>
+        {/await}
       </div>
     {/if}
   </Flex>
@@ -47,12 +62,24 @@
     flex: 1;
     height: 100%;
     overflow-y: scroll;
+    justify-content: center;
   }
   /* Hide the scrollbar in Chrome */
   :global(.annotation-section::-webkit-scrollbar) {
     display: none;
   }
-
+  .waiting-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2rem;
+  }
+  .error-message {
+    font-weight: 300;
+    color: #ff4f4f;
+    padding-left: 1rem;
+    padding-top: 2rem;
+  }
   :global(body) {
     background-color: #3d3d3d;
     color: #ffffff;

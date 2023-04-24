@@ -1,5 +1,5 @@
 <script>
-  import { tableRows } from "../src/lib/stores";
+  import { tableRowData } from "../src/lib/stores";
   import SvelteTable from "svelte-table";
 
   const columns = [
@@ -17,7 +17,7 @@
     },
   ];
 
-  $: rows = $tableRows;
+  $: rows = $tableRowData;
 </script>
 
 <main>

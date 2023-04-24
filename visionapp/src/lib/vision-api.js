@@ -1,4 +1,4 @@
-import { tableRows } from "./stores";
+import { tableRowData } from "./stores";
 
 export async function annotateImage(sourceImage) {
   let postData = {
@@ -36,7 +36,10 @@ export async function annotateImage(sourceImage) {
     var authToken = import.meta.env.VITE_AUTH_TOKEN;
     var gcpBillingProject = import.meta.env.VITE_GCP_BILLING_PROJECT;
   } catch (envVarError) {
-    console.error("A required environment variable was not set.");
+    const envVarErrorMessage =
+      "A required environment variable was not set. \
+    Refer to the documentation for further information";
+    console.error(envVarErrorMessage);
   }
   try {
     const response = await fetch(visionApiUrl, {
@@ -52,8 +55,9 @@ export async function annotateImage(sourceImage) {
     const result = await response.json();
 
     if (!response.ok) {
-      console.error(result.error);
-      throw new Error(`An error occured with the Vision API: ${result.error.message}`);
+      const responseErrorMessage = `An error occured with the Vision API: \
+      ${result.error.message}`;
+      throw new Error(responseErrorMessage);
     }
 
     processResults(result);
@@ -82,6 +86,5 @@ function processResults(annotationResult) {
       console.log(`${desc} - ${score}% confident`);
     });
   });
-
-  tableRows.set(rows);
+  tableRowData.set(rows);
 }

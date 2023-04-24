@@ -1,4 +1,4 @@
 import { writable } from "svelte/store";
 
-export const tableRows = writable([]);
-export const haveImageAnnotations = writable(false);
+export const imageData = writable("");
+export const tableRowData = writable([]);
