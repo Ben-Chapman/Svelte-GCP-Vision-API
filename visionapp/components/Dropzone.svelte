@@ -3,6 +3,7 @@
   import { annotateImage } from "../src/lib/vision-api";
 
   import Dropzone from "dropzone";
+  let filename = "";
 
   function createDropzone() {
     let myDropzone = new Dropzone(document.body, {
@@ -18,9 +19,10 @@
     });
 
     myDropzone.on("addedfile", function (file) {
-      console.log(`Added here ${file}`);
+      console.log(`Added here ${file.upload.filename}`);
       const reader = new FileReader();
       reader.onload = () => {
+        filename = file.upload.filename;
         // When a file is dropped, annotate it
         annotateImage(reader.result.split(",")[1]);
       };
@@ -36,7 +38,11 @@
 
 <main>
   <div class="preview-container" />
-  <h1>Drop image here!</h1>
+  {#if filename === ""}
+    <h1>Drop image here!</h1>
+  {:else}
+    <p>{filename}</p>
+  {/if}
   <div id="custom-template">
     <div class="dz-preview dz-file-preview">
       <div class="dz-image"><img data-dz-thumbnail /></div>
