@@ -1,8 +1,10 @@
 <script>
   import { onMount } from "svelte";
   import { annotateImage } from "../src/lib/vision-api";
+  import { haveImageAnnotations } from "../src/lib/stores";
 
   import Dropzone from "dropzone";
+
   let filename = "";
 
   function createDropzone() {
@@ -25,6 +27,7 @@
         filename = file.upload.filename;
         // When a file is dropped, annotate it
         annotateImage(reader.result.split(",")[1]);
+        haveImageAnnotations.set(true);
       };
       reader.onabort = () => console.log("file reading was aborted");
       reader.onerror = () => console.log("file reading has failed");
@@ -45,7 +48,7 @@
   {/if}
   <div id="custom-template">
     <div class="dz-preview dz-file-preview">
-      <div class="dz-image"><img data-dz-thumbnail /></div>
+      <div class="dz-image"><img class="image-preview" data-dz-thumbnail /></div>
       <div class="dz-progress">
         <span class="dz-upload" data-dz-uploadprogress />
       </div>
@@ -57,5 +60,9 @@
 <style>
   .preview-container {
     align-self: flex-end;
+  }
+  .image-preview {
+    /* Round the upper corners of the preview image to match it's container */
+    border-radius: 10px 10px 0 0;
   }
 </style>

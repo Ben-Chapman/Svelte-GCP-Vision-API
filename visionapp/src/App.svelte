@@ -2,6 +2,8 @@
   import Flex from "svelte-flex";
   import Dropzone from "../components/Dropzone.svelte";
   import Annotations from "../components/Annotations.svelte";
+
+  import { haveImageAnnotations } from "./lib/stores";
 </script>
 
 <svelte:head>
@@ -18,14 +20,17 @@
   <Flex justify="left">
     <img src="../visionapp-logo.png" alt="The VisionApp Logo" class="logo" />
   </Flex>
+
   <Flex justify="around" align="center" class="flexbox">
     <div class="file-drop-section">
       <Dropzone />
     </div>
 
-    <div class="annotation-section">
-      <Annotations />
-    </div>
+    {#if $haveImageAnnotations}
+      <div class="annotation-section">
+        <Annotations />
+      </div>
+    {/if}
   </Flex>
 </main>
 
