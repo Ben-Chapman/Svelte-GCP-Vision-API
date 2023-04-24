@@ -4,6 +4,16 @@
   import Annotations from "../components/Annotations.svelte";
 </script>
 
+<svelte:head>
+  <title>VisionApp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@300;500&display=swap"
+    rel="stylesheet"
+  />
+</svelte:head>
+
 <main>
   <Flex justify="left">
     <img src="../visionapp-logo.png" alt="The VisionApp Logo" class="logo" />
