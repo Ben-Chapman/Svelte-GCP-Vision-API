@@ -1,13 +1,12 @@
 <script>
   import Flex from "svelte-flex";
+  import { Circle3 } from "svelte-loading-spinners";
+
   import Dropzone from "../components/Dropzone.svelte";
   import Annotations from "../components/Annotations.svelte";
-  import { scale } from "svelte/transition";
-  import { quintOut } from "svelte/easing";
-  import { imageData, tableRowData } from "./lib/stores";
 
-  import { Circle3 } from "svelte-loading-spinners";
   import { annotateImage } from "./lib/vision-api";
+  import { imageData } from "./lib/stores";
 </script>
 
 <svelte:head>
@@ -50,12 +49,19 @@
 </main>
 
 <style>
+  :global(body) {
+    background-color: #3d3d3d;
+    color: #ffffff;
+    font-family: "Encode Sans Condensed", sans-serif;
+  }
+
   .file-drop-section {
     flex: 2;
     height: 100%;
     align-self: center;
     background-color: #ffffff24;
     border-radius: 10px;
+    object-fit: contain;
   }
 
   .annotation-section {
@@ -80,11 +86,7 @@
     padding-left: 1rem;
     padding-top: 2rem;
   }
-  :global(body) {
-    background-color: #3d3d3d;
-    color: #ffffff;
-    font-family: "Encode Sans Condensed", sans-serif;
-  }
+
   :global(.flexbox) {
     width: 80vw;
     height: 80vh;
