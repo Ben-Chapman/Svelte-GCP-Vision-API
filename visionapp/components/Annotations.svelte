@@ -1,6 +1,6 @@
 <script>
-  import { tableRowData } from "../src/lib/stores";
   import SvelteTable from "svelte-table";
+  import { tableRowData } from "../src/lib/stores";
 
   const columns = [
     {
