@@ -9,6 +9,11 @@
   import { imageData } from "./lib/stores";
 </script>
 
+<!--
+  Using the <svelte:head> element to insert/replace elements in the application's
+  document.head. Specifically, changing the <title> and adding a Google Font we're
+  using throughout the site.
+-->
 <svelte:head>
   <title>VisionApp</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,15 +25,28 @@
 </svelte:head>
 
 <main>
+  <!-- Including the site logo here -->
   <Flex justify="left">
     <img src="../visionapp-logo.png" alt="The VisionApp Logo" class="logo" />
   </Flex>
 
+  <!-- This Flex container is the primary container for the site. -->
   <Flex justify="around" align="center" class="flexbox">
     <div class="file-drop-section">
+      <!-- Including the dropzone section -->
       <Dropzone />
     </div>
+    <!--
+      This is a Svelte conditional statement which contains an {#await} block.
 
+      If we have imageData (an uploaded image), then instantiate the {#await}
+      block. The {#await} block is calling the annotateImage() function, and
+      works with the Promise returned from that function. When the Promise is
+      pending (waiting for a response from the Vision API), a waiting spinner is
+      shown. When the promise has been fulfilled ({:then}) display the Annotations
+      component. If the promise was rejected ({:catch}), display the resulting
+      error message.
+    -->
     {#if $imageData}
       <div class="annotation-section">
         {#await annotateImage($imageData)}
@@ -55,6 +73,12 @@
     font-family: "Encode Sans Condensed", sans-serif;
   }
 
+  :global(.flexbox) {
+    width: 80vw;
+    height: 80vh;
+    align-items: center;
+  }
+
   .file-drop-section {
     flex: 2;
     height: 100%;
@@ -70,16 +94,19 @@
     overflow-y: scroll;
     justify-content: center;
   }
-  /* Hide the scrollbar in Chrome */
+
+  /* Hide the annotation section scrollbar in Chrome */
   :global(.annotation-section::-webkit-scrollbar) {
     display: none;
   }
+
   .waiting-spinner {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 2rem;
   }
+
   .error-message {
     font-weight: 300;
     color: #ff4f4f;
@@ -87,11 +114,6 @@
     padding-top: 2rem;
   }
 
-  :global(.flexbox) {
-    width: 80vw;
-    height: 80vh;
-    align-items: center;
-  }
   .logo {
     height: 7rem;
     margin-bottom: 1.25rem;
