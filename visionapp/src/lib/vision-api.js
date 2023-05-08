@@ -75,7 +75,7 @@ export async function annotateImage(sourceImage) {
     const result = await response.json();
 
     if (!response.ok) {
-      const responseErrorMessage = `An error occured with the Vision API: \
+      const responseErrorMessage = `An error occurred with the Vision API: \
       ${result.error.message}`;
       throw new Error(responseErrorMessage);
     }
