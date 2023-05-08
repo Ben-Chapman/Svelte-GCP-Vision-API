@@ -1,4 +1,10 @@
-# Explore the GCP Vision API in Svelte
+# Explore the GCP Vision API in a Svelte Web Application
+A proof of concept showcasing the integration of the [GCP Vision API](https://cloud.google.com/vision) into a [Svelte](https://svelte.dev) single page web application.
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/5124569/236921604-d3566070-6a3f-4abb-848b-fbeb0745ac7d.gif" width="60%" style="text-align: center">
+  </p>
+
 
 ## Getting started
 
@@ -6,9 +12,9 @@
 
 - Follow the Vision API
   [getting started instructions](https://cloud.google.com/vision/docs/detect-labels-image-client-libraries#before-you-begin)
-  to setup your GCP environment
+  to set up your GCP environment
   - Ensure that you have successfully completed the following:
-    - Either have a new or existing GCP project with billing enabled
+    - Have a new or existing GCP project with billing enabled
     - Have [enabled](https://console.cloud.google.com/flows/enableapi?apiid=vision.googleapis.com) the GCP Vision API
     - Installed and initialized the Google Cloud CLI
 - **Note:** For this demo project you will be using your GCP user account for
@@ -60,9 +66,9 @@ curl -X POST \
 
 ## Download and configure the Svelte GCP Vision web application
 
-- Using the tool of your choice clone this repository to your local workstation
+- Clone this repository to your local workstation
   - From your Terminal: `git clone git@github.com:Ben-Chapman/Svelte-GCP-Vision-API.git`
-- Ensure that you have the [Node.js and the Node Package Manager (npm) package installed](https://nodejs.org/en/download/package-manager):
+- Ensure that you have the [Node.js and the Node Package Manager (npm) packages installed](https://nodejs.org/en/download/package-manager):
   - macOS using Homebrew: `brew install npm`
   - Linux:
     - Debian/Ubuntu: `apt install npm`
@@ -70,7 +76,7 @@ curl -X POST \
     - Fedora: `dnf install npm`
 - Once Node JS and npm have been installed, install the Node JS packages needed
   to run this application:
-  - `cd Svelte-GCP-Vision-API/visionapp`
+  - `cd Svelte-GCP-Vision-API/visionapp/`
   - `npm install`
 
 ## Run the Svelte GCP Vision app
