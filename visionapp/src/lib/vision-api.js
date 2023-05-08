@@ -53,7 +53,7 @@ export async function annotateImage(sourceImage) {
 
   try {
     // Ensure an env variable was set, containing the GCP auth token
-    var authToken = import.meta.env.VITE_AUTH_TOKEN;
+    var authToken = import.meta.env.VITE_GCP_AUTH_TOKEN;
     var gcpBillingProject = import.meta.env.VITE_GCP_BILLING_PROJECT;
   } catch (envVarError) {
     const envVarErrorMessage =

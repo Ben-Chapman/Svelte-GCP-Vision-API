@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "export VITE_AUTH_TOKEN=$(gcloud auth print-access-token); export VITE_GCP_BILLING_PROJECT=$(gcloud config get project); vite",
+    "dev": "export VITE_GCP_AUTH_TOKEN=$(gcloud auth print-access-token); export VITE_GCP_BILLING_PROJECT=$(gcloud config get project); vite",
     "build": "vite build",
     "preview": "vite preview"
   },
