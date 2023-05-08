@@ -1,5 +1,9 @@
 import { tableRowData } from "./stores";
 
+/**
+ * @param {String} sourceImage A base64 encoded string containing image data.
+ * This image data is passed into the GCP Cloud Vision API for annotation.
+ */
 export async function annotateImage(sourceImage) {
   let postData = {
     requests: [
