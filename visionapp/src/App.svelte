@@ -25,15 +25,14 @@
 </svelte:head>
 
 <main>
-  <!-- Including the site logo here -->
-  <Flex justify="left">
+  <div class="logo">
     <img src="../visionapp-logo.png" alt="The VisionApp Logo" class="logo" />
-  </Flex>
+  </div>
 
   <!-- This Flex container is the primary container for the site. -->
-  <Flex justify="around" align="center" class="flexbox">
+  <Flex direction="row" class="flexbox">
     <div class="file-drop-section">
-      <!-- Including the dropzone section -->
+      <!-- Including the dropzone component -->
       <Dropzone />
     </div>
     <!--
@@ -74,14 +73,13 @@
   }
 
   :global(.flexbox) {
-    width: 80vw;
     height: 80vh;
-    align-items: center;
   }
 
   .file-drop-section {
     flex: 2;
     height: 100%;
+    width: 80vw;
     align-self: center;
     background-color: #ffffff24;
     border-radius: 10px;
@@ -116,7 +114,6 @@
 
   .logo {
     height: 7rem;
-    margin-bottom: 1.25rem;
-    align-items: baseline;
+    text-align: left;
   }
 </style>
