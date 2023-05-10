@@ -1,22 +1,23 @@
 # Explore the GCP Vision API in a Svelte Web Application
+
 A proof of concept showcasing the integration of the [GCP Vision API](https://cloud.google.com/vision) into a [Svelte](https://svelte.dev) single page web application.
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/5124569/236921604-d3566070-6a3f-4abb-848b-fbeb0745ac7d.gif" width="60%" style="text-align: center">
   </p>
 
-
 ## Getting started
 
 ### Install and Configure Cloud Vision API
 
 - Follow the Vision API
-  [getting started instructions](https://cloud.google.com/vision/docs/detect-labels-image-client-libraries#before-you-begin)
+  [getting started instructions](https://cloud.google.com/vision/docs/detect-labels-image-command-line#before-you-begin)
   to set up your GCP environment
   - Ensure that you have successfully completed the following:
     - Have a new or existing GCP project with billing enabled
     - Have [enabled](https://console.cloud.google.com/flows/enableapi?apiid=vision.googleapis.com) the GCP Vision API
     - Installed and initialized the Google Cloud CLI
+    - You do not need to grant and additional roles to your Google Account.
 - **Note:** For this demo project you will be using your GCP user account for
   authentication, and we will not be using any of the Vision API client libraries.
 - To validate you have everything setup correctly, from your Terminal issue the
@@ -71,10 +72,14 @@ curl -X POST \
 - Ensure that you have the [Node.js and the Node Package Manager (npm) packages installed](https://nodejs.org/en/download/package-manager):
   - macOS using Homebrew: `brew install npm`
   - Linux:
-    - Debian/Ubuntu: `apt install npm`
-    - Arch Linux: `pacman -S npm`
-    - Fedora: `dnf install npm`
-- Once Node JS and npm have been installed, install the Node JS packages needed
+    - Debian/Ubuntu: `sudo apt install npm`
+    - Arch Linux: `sudo pacman -S npm`
+    - Fedora: `sudo dnf install npm`
+  - To verify a successful Node.js and npm installation, the following commands
+    should return a version number for both Node and npm:
+    - `echo -e "Node.js Version: $(node -v)\tnpm Version: $(npm -v)"`
+      - Any version number is expected to work for this project.
+- Once Node and npm have been installed, install the Node.js packages needed
   to run this application:
   - `cd Svelte-GCP-Vision-API/visionapp/`
   - `npm install`
